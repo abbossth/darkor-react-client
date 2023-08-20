@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import axios from "../api/axios";
 import { useDispatch } from "react-redux";
+import Navbar from "../components/navbar";
 import { getAllProducts } from "../store/actions/products";
 import { getAllCategories } from "../store/actions/categories";
+import Footer from "../components/footer";
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -31,9 +33,10 @@ const Layout = () => {
     fetchCategories();
   }, []);
   return (
-    <div>
-      <div>Layout</div>
+    <div class="site-wrap">
+      <Navbar />
       <Outlet />
+      <Footer />
     </div>
   );
 };
