@@ -29,7 +29,7 @@ a:hover {
   color: #000;
 }
 
-.site-wrap:before {
+.site-wrap-before {
   -webkit-transition: 0.3s all ease-in-out;
   -o-transition: 0.3s all ease-in-out;
   transition: 0.3s all ease-in-out;
@@ -52,9 +52,10 @@ a:hover {
   z-index: 2;
   overflow: hidden;
 }
-.offcanvas-menu .site-wrap:before {
+.offcanvas-menu .site-wrap-before {
   opacity: 1;
   visibility: visible;
+  z-index: 1990;
 }
 
 .btn {
@@ -205,7 +206,7 @@ a:hover {
 .site-navbar {
   background: #fff;
   margin-bottom: 0px;
-  z-index: 1999;
+  z-index: 1800;
   position: relative;
   background: #fff !important;
 }

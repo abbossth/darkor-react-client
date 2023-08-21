@@ -14,9 +14,9 @@ const PopularProducts = () => {
         </div>
         <div class="row">
           {products &&
-            products?.slice(0, 6)?.map((p) => {
+            products?.slice(0, 6)?.map((p, idx) => {
               return (
-                <div class="col-lg-4 col-md-6 item-entry mb-4">
+                <div key={idx} class="col-lg-4 col-md-6 item-entry mb-4">
                   <Link
                     to={`/product/${p._id}`}
                     class="product-item md-height bg-gray d-block"

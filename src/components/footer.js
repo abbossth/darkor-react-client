@@ -1,4 +1,5 @@
 import React from "react";
+import FooterPhoto from "../assets/images/about_1.jpg";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
             <h3 class="footer-heading mb-4">Promo</h3>
             <a href="#" class="block-6">
               <img
-                src="images/about_1.jpg"
+                src={FooterPhoto}
                 alt="Image placeholder"
                 class="img-fluid rounded mb-4"
               />

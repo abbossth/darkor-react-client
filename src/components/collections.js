@@ -14,9 +14,9 @@ const Collections = () => {
         </div>
         <div class="row">
           {categories &&
-            categories?.slice(0, 12)?.map((c) => {
+            categories?.slice(0, 12)?.map((c, idx) => {
               return (
-                <div class="col-lg-4 col-md-6 item-entry mb-4">
+                <div key={idx} class="col-lg-4 col-md-6 item-entry mb-4">
                   <Link
                     to={`/product/${c._id}`}
                     class="product-item category-item md-height bg-gray d-block"

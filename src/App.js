@@ -11,6 +11,8 @@ import "./assets/css/owl.theme.default.min.css";
 import "./assets/css/style.css";
 import "./assets/css/custom.css";
 import "./assets/fonts/style.css";
+import Shop from "./pages/shop";
+import Contact from "./pages/contact";
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/test" element={<Test />} />
           </Route>
         </Routes>

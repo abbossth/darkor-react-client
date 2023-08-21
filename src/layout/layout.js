@@ -6,6 +6,7 @@ import Navbar from "../components/navbar";
 import { getAllProducts } from "../store/actions/products";
 import { getAllCategories } from "../store/actions/categories";
 import Footer from "../components/footer";
+import MobileNavbar from "../components/mobileNavbar";
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -32,11 +33,16 @@ const Layout = () => {
     fetchProducts();
     fetchCategories();
   }, []);
+
+  const bodyTag = document.getElementById("body");
+  const handleMenuToggle = () => bodyTag.classList.toggle("offcanvas-menu");
   return (
     <div class="site-wrap">
+      <MobileNavbar />
       <Navbar />
       <Outlet />
       <Footer />
+      <div class="site-wrap-before" onClick={handleMenuToggle}></div>
     </div>
   );
 };
