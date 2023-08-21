@@ -3,7 +3,6 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Home from "./pages/home";
 import Layout from "./layout/layout";
-import Test from "./pages/test";
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/magnific-popup.css";
 import "./assets/css/jquery-ui.css";
@@ -13,6 +12,7 @@ import "./assets/css/custom.css";
 import "./assets/fonts/style.css";
 import Shop from "./pages/shop";
 import Contact from "./pages/contact";
+import ShopSingle from "./pages/shopSingle";
 
 const App = () => {
   return (
@@ -22,8 +22,8 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/product/:productId" element={<ShopSingle />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/test" element={<Test />} />
           </Route>
         </Routes>
       </Provider>
