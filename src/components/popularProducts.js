@@ -14,7 +14,7 @@ const PopularProducts = () => {
         </div>
         <div class="row">
           {products &&
-            products.map((p) => {
+            products?.slice(0, 6)?.map((p) => {
               return (
                 <div class="col-lg-4 col-md-6 item-entry mb-4">
                   <Link
