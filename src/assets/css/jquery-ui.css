@@ -207,6 +207,7 @@ button.ui-button::-moz-focus-inner {
   display: block;
   border: 0;
   background-position: 0 0;
+  background-color: #ee4266;
 }
 
 /* support: IE8 - See #6727 */
@@ -271,15 +272,15 @@ button.ui-button::-moz-focus-inner {
   font-size: 1em;
 }
 .ui-widget-content {
-  border: 1px solid #a6c9e2;
+  border: 1px solid #ee4266;
   color: #222222;
 }
 .ui-widget-content a {
   color: #222222;
 }
 .ui-widget-header {
-  border: 1px solid #4297d7;
-  background: #5c9ccc url("../images/hero_1.jpg") 50% 50% repeat-x;
+  /* border: 1px solid #ee4266; */
+  /* background: #ee4266 url("../images/hero_1.jpg") 50% 50% repeat-x; */
   color: #ffffff;
   font-weight: bold;
 }

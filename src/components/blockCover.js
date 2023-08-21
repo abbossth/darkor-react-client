@@ -1,5 +1,6 @@
 import React from "react";
 import CoverPhoto from "../assets/images/model_6.png";
+import { Link } from "react-router-dom";
 
 const BlockCover = () => {
   return (
@@ -11,9 +12,9 @@ const BlockCover = () => {
               <h2 class="sub-title">#New Summer Collection 2019</h2>
               <h1>New Shoes</h1>
               <p>
-                <a href="#" class="btn btn-black rounded-0">
+                <Link to="/shop" class="btn btn-black rounded-0">
                   Shop Now
-                </a>
+                </Link>
               </p>
             </div>
           </div>
