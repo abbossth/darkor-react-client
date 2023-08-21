@@ -29,42 +29,6 @@ const Collections = () => {
               </div>
             );
           })}
-          {/* <div class="col-lg-8">
-            <div class="product-item sm-height full-height bg-gray">
-              <a href="#" class="product-category">
-                {categories[0]?.name} <span>25 items</span>
-              </a>
-              <img
-                src={`${categories[0]?.image}`}
-                alt="Image"
-                class="img-fluid"
-                style={{ backgroundSize: "cover" }}
-              />
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="product-item sm-height bg-gray mb-4">
-              <a href="#" class="product-category">
-                {categories[1].name} <span>25 items</span>
-              </a>
-              <img
-                src={`${categories[1]?.image}`}
-                alt="Image"
-                class="img-fluid"
-              />
-            </div>
-
-            <div class="product-item sm-height bg-gray">
-              <a href="#" class="product-category">
-                {categories[2]?.name} <span>25 items</span>
-              </a>
-              <img
-                src={`${categories[2]?.image}`}
-                alt="Image"
-                class="img-fluid"
-              />
-            </div>
-          </div> */}
         </div>
       </div>
     </section>
