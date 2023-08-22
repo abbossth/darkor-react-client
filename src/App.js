@@ -13,6 +13,7 @@ import "./assets/fonts/style.css";
 import Shop from "./pages/shop";
 import Contact from "./pages/contact";
 import ShopSingle from "./pages/shopSingle";
+import Cart from "./pages/cart";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/shop" element={<Shop />} />
             <Route path="/product/:productId" element={<ShopSingle />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/cart" element={<Cart />} />
           </Route>
         </Routes>
       </Provider>

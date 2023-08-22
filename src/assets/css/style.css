@@ -632,6 +632,12 @@ a:hover {
   overflow: hidden;
   z-index: 9;
 }
+.contact-page-cover {
+  background-image: url("../images//hero_2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 .site-blocks-cover,
 .site-blocks-cover .row {
   min-height: 600px;

@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import productsReducer from "./reducers/productReducer";
 import categoriesReducer from "./reducers/categoryReducer";
+import cartReducer from "./reducers/cartReducer";
 
 import {
   persistStore,
@@ -18,6 +19,7 @@ import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 const rootReducer = combineReducers({
   productsReducer,
   categoriesReducer,
+  cartReducer,
 });
 
 const persistConfig = {

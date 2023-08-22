@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "../api/axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/actions/cartItems";
 
 const ShopSingle = () => {
+  const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
   const fetchSingleProduct = async () => {
@@ -17,6 +19,12 @@ const ShopSingle = () => {
     }
   };
   const { products } = useSelector((state) => state.productsReducer);
+
+  const handleAddToCart = () => {
+    if (product) {
+      dispatch(addToCart({ ...product }));
+    }
+  };
 
   useEffect(() => {
     fetchSingleProduct();
@@ -127,12 +135,12 @@ const ShopSingle = () => {
                   </div>
                 </div>
                 <p>
-                  <Link
-                    to="#"
+                  <button
+                    onClick={handleAddToCart}
                     class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary"
                   >
                     Add To Cart
-                  </Link>
+                  </button>
                 </p>
               </div>
             </div>
