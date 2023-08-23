@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { items, cartTotal } = useSelector((state) => state.cartReducer);
+  const { items, cartTotal, totalCount } = useSelector(
+    (state) => state.cartReducer
+  );
   const dispatch = useDispatch();
   console.log("items", items);
 
@@ -156,12 +158,18 @@ const Cart = () => {
 
                   <div class="row">
                     <div class="col-md-12">
-                      <button
-                        class="btn btn-primary btn-lg btn-block"
-                        onclick="window.location='checkout.html'"
-                      >
-                        Proceed To Checkout
-                      </button>
+                      {totalCount ? (
+                        <Link
+                          to={"/checkout"}
+                          style={{ pointerEvents: totalCount ? "" : "none" }}
+                        >
+                          <button class="btn btn-primary btn-lg btn-block">
+                            Proceed To Checkout
+                          </button>
+                        </Link>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                 </div>

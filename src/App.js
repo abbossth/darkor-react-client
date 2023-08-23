@@ -14,6 +14,7 @@ import Shop from "./pages/shop";
 import Contact from "./pages/contact";
 import ShopSingle from "./pages/shopSingle";
 import Cart from "./pages/cart";
+import Checkout from "./pages/checkout";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="/product/:productId" element={<ShopSingle />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Route>
         </Routes>
       </Provider>
