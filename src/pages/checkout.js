@@ -2,6 +2,7 @@ import axios from "../api/axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ScrollToTop } from "../plugins/custom";
 
 const Checkout = () => {
   const { items, cartTotal } = useSelector((state) => state.cartReducer);
@@ -35,8 +36,8 @@ const Checkout = () => {
         products,
       });
       setClientId(null);
+      ScrollToTop();
       navigate("/thankyou", { replace: true });
-      console.log(res?.data?.data?.data);
     } catch (err) {
       console.log(`Unhandled Error while creating order ${err}`);
     }
