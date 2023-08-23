@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "../api/axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../store/actions/cartItems";
+import {
+  addToCart,
+  removeFromCart,
+  updateQuantity,
+} from "../store/actions/cartItems";
 
 const ShopSingle = () => {
   const dispatch = useDispatch();
@@ -19,11 +23,31 @@ const ShopSingle = () => {
     }
   };
   const { products } = useSelector((state) => state.productsReducer);
-
+  const { items } = useSelector((state) => state.cartReducer);
+  const productCount = items.find((i) => i._id === productId)?.quantity;
   const handleAddToCart = () => {
+    if (productCount) return;
     if (product) {
       dispatch(addToCart({ ...product }));
     }
+  };
+
+  function handleRemoveFromCart(itemId) {
+    dispatch(removeFromCart(itemId));
+  }
+
+  const handleCountPlus = () => {
+    if (!productCount) return handleAddToCart();
+    if (product) {
+      dispatch(updateQuantity(productId, productCount + 1));
+    }
+  };
+
+  const handleCountMinus = () => {
+    if (product && productCount && productCount > 0) {
+      dispatch(updateQuantity(productId, productCount - 1));
+    }
+    if (product && productCount === 1) return handleRemoveFromCart(productId);
   };
 
   useEffect(() => {
@@ -110,6 +134,7 @@ const ShopSingle = () => {
                   <div class="input-group mb-3" style={{ maxWidth: "120px" }}>
                     <div class="input-group-prepend">
                       <button
+                        onClick={handleCountMinus}
                         class="btn btn-outline-primary js-btn-minus"
                         type="button"
                       >
@@ -119,13 +144,14 @@ const ShopSingle = () => {
                     <input
                       type="text"
                       class="form-control text-center"
-                      value="1"
+                      value={productCount || 0}
                       placeholder=""
                       aria-label="Example text with button addon"
                       aria-describedby="button-addon1"
                     />
                     <div class="input-group-append">
                       <button
+                        onClick={handleCountPlus}
                         class="btn btn-outline-primary js-btn-plus"
                         type="button"
                       >

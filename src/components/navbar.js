@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
   const bodyTag = document.getElementById("body");
   const handleMenuOpen = () => bodyTag.classList.toggle("offcanvas-menu");
+  const { totalCount } = useSelector((state) => state.cartReducer);
   return (
     <>
       <div class="site-navbar bg-white py-2">
@@ -78,7 +80,7 @@ const Navbar = () => {
               </Link>
               <Link to="/cart" class="icons-btn d-inline-block bag">
                 <span class="icon-shopping-bag"></span>
-                <span class="number">2</span>
+                <span class="number">{totalCount}</span>
               </Link>
               <div
                 onClick={handleMenuOpen}

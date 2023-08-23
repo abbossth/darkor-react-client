@@ -1,4 +1,28 @@
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart, updateQuantity } from "../store/actions/cartItems";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 const Cart = () => {
+  const { items, cartTotal } = useSelector((state) => state.cartReducer);
+  const dispatch = useDispatch();
+  console.log("items", items);
+
+  function handleRemoveFromCart(itemId) {
+    dispatch(removeFromCart(itemId));
+  }
+
+  const handleCountPlus = (id, count) => {
+    dispatch(updateQuantity(id, count + 1));
+  };
+
+  const handleCountMinus = (id, count) => {
+    if (id && count === 1) return handleRemoveFromCart(id);
+    if (id && count > 0) {
+      dispatch(updateQuantity(id, count - 1));
+    }
+  };
+
   return (
     <>
       <div class="bg-light py-3">
@@ -30,109 +54,71 @@ const Cart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="product-thumbnail">
-                        <img
-                          src="images/cloth_1.jpg"
-                          alt="Image"
-                          class="img-fluid"
-                        />
-                      </td>
-                      <td class="product-name">
-                        <h2 class="h5 text-black">Top Up T-Shirt</h2>
-                      </td>
-                      <td>$58.00</td>
-                      <td>53</td>
-                      <td>
-                        <div
-                          class="input-group mb-3"
-                          style={{ maxWidth: "120px" }}
-                        >
-                          <div class="input-group-prepend">
-                            <button
-                              class="btn btn-outline-primary js-btn-minus"
-                              type="button"
-                            >
-                              &minus;
-                            </button>
-                          </div>
-                          <input
-                            type="text"
-                            class="form-control text-center"
-                            value="1"
-                            placeholder=""
-                            aria-label="Example text with button addon"
-                            aria-describedby="button-addon1"
-                          />
-                          <div class="input-group-append">
-                            <button
-                              class="btn btn-outline-primary js-btn-plus"
-                              type="button"
-                            >
-                              &#43;
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                      <td>$58.00</td>
-                      <td>
-                        <a href="#" class="btn btn-primary height-auto btn-sm">
-                          X
-                        </a>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="product-thumbnail">
-                        <img
-                          src="images/cloth_2.jpg"
-                          alt="Image"
-                          class="img-fluid"
-                        />
-                      </td>
-                      <td class="product-name">
-                        <h2 class="h5 text-black">Polo Shirt</h2>
-                      </td>
-                      <td>$49.00</td>
-                      <td>XL</td>
-                      <td>
-                        <div
-                          class="input-group mb-3"
-                          style={{ maxWidth: "120px" }}
-                        >
-                          <div class="input-group-prepend">
-                            <button
-                              class="btn btn-outline-primary js-btn-minus"
-                              type="button"
-                            >
-                              &minus;
-                            </button>
-                          </div>
-                          <input
-                            type="text"
-                            class="form-control text-center"
-                            value="1"
-                            placeholder=""
-                            aria-label="Example text with button addon"
-                            aria-describedby="button-addon1"
-                          />
-                          <div class="input-group-append">
-                            <button
-                              class="btn btn-outline-primary js-btn-plus"
-                              type="button"
-                            >
-                              &#43;
-                            </button>
-                          </div>
-                        </div>
-                      </td>
-                      <td>$49.00</td>
-                      <td>
-                        <a href="#" class="btn btn-primary height-auto btn-sm">
-                          X
-                        </a>
-                      </td>
-                    </tr>
+                    {items &&
+                      items?.map((i) => {
+                        return (
+                          <tr>
+                            <td class="product-thumbnail">
+                              <img
+                                src={`${i.image}`}
+                                alt="Image"
+                                class="img-fluid"
+                              />
+                            </td>
+                            <td class="product-name">
+                              <h2 class="h5 text-black">{i.name}</h2>
+                            </td>
+                            <td>{i.price} UZS</td>
+                            <td>{i.size}</td>
+                            <td>
+                              <div
+                                class="input-group mb-3"
+                                style={{ maxWidth: "120px" }}
+                              >
+                                <div class="input-group-prepend">
+                                  <button
+                                    onClick={() =>
+                                      handleCountMinus(i._id, i.quantity)
+                                    }
+                                    class="btn btn-outline-primary js-btn-minus"
+                                    type="button"
+                                  >
+                                    &minus;
+                                  </button>
+                                </div>
+                                <input
+                                  type="text"
+                                  class="form-control text-center"
+                                  value={i.quantity}
+                                  placeholder=""
+                                  aria-label="Example text with button addon"
+                                  aria-describedby="button-addon1"
+                                />
+                                <div class="input-group-append">
+                                  <button
+                                    onClick={() =>
+                                      handleCountPlus(i._id, i.quantity)
+                                    }
+                                    class="btn btn-outline-primary js-btn-plus"
+                                    type="button"
+                                  >
+                                    &#43;
+                                  </button>
+                                </div>
+                              </div>
+                            </td>
+                            <td>{i.total} UZS</td>
+                            <td>
+                              <span
+                                onClick={() => handleRemoveFromCart(i._id)}
+                                class="btn btn-primary height-auto btn-sm"
+                              >
+                                X
+                              </span>
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </div>
@@ -143,9 +129,11 @@ const Cart = () => {
             <div class="col-md-6">
               <div class="row mb-5">
                 <div class="col-md-6">
-                  <button class="btn btn-outline-primary btn-sm btn-block">
-                    Continue Shopping
-                  </button>
+                  <Link to="/shop">
+                    <button class="btn btn-outline-primary btn-sm btn-block">
+                      Continue Shopping
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -157,20 +145,12 @@ const Cart = () => {
                       <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <div class="col-md-6">
-                      <span class="text-black">Subtotal</span>
-                    </div>
-                    <div class="col-md-6 text-right">
-                      <strong class="text-black">$230.00</strong>
-                    </div>
-                  </div>
                   <div class="row mb-5">
                     <div class="col-md-6">
-                      <span class="text-black">Total</span>
+                      <b class="text-black fw-bold">Total</b>
                     </div>
                     <div class="col-md-6 text-right">
-                      <strong class="text-black">$230.00</strong>
+                      <span class="text-black">{cartTotal} UZS</span>
                     </div>
                   </div>
 
