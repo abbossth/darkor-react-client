@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ScrollToTop } from "../plugins/custom";
 
 const Collections = () => {
   const { categories } = useSelector((state) => state.categoriesReducer);
@@ -18,7 +19,8 @@ const Collections = () => {
               return (
                 <div key={idx} class="col-lg-4 col-md-6 item-entry mb-4">
                   <Link
-                    to={`/product/${c._id}`}
+                    onClick={ScrollToTop}
+                    to={`/shop?categoryId=${c._id}`}
                     class="product-item category-item md-height bg-gray d-block"
                   >
                     <span class="product-category">{c.name}</span>

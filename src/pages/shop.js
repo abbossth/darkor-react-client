@@ -1,10 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ScrollToTop } from "../plugins/custom";
+import axios from "../api/axios";
+import FilterCheckbox from "../components/filterCheckbox";
 
 const Shop = () => {
   const { products } = useSelector((state) => state.productsReducer);
+  const { categories } = useSelector((state) => state.categoriesReducer);
+  const [filteredProducts, setFilteredProducts] = useState([...products]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryId = searchParams.get("categoryId") || "";
+  const [selectedCategoryId, setSelectedCategoryId] = useState(
+    categoryId.length ? categoryId : ""
+  );
+  const [filters, setFilters] = useState(
+    categoryId.length ? `?categoryId=${categoryId}` : ""
+  );
+  const [pagenation, setPagenation] = useState({
+    page: 1,
+    limit: 12,
+    totalPages: 1,
+  });
+  console.log(categories);
+  const fetchFilteredProducts = async () => {
+    try {
+      const res = await axios.get(`/api/v1/product${filters}`);
+      setFilteredProducts(res?.data?.data?.data?.filteredData);
+      setPagenation(res?.data?.data?.data?.page);
+    } catch (err) {
+      console.log(`Unhandled Error in fetching filtered products ${err}`);
+    }
+  };
+
+  const handleCategoryOnChange = (e) => {
+    setSelectedCategoryId(e.target.value);
+    setSearchParams({ categoryId: e.target.value });
+    if (e.target.value) return setFilters(`?categoryId=${e.target.value}`);
+    return setFilters("");
+  };
+
+  useEffect(() => {
+    fetchFilteredProducts();
+  }, [filters]);
+
   return (
     <>
       <div class="custom-border-bottom py-3">
@@ -58,8 +97,8 @@ const Shop = () => {
                 </div>
               </div>
               <div class="row mb-5">
-                {products &&
-                  products?.slice(0, 6)?.map((p, idx) => {
+                {filteredProducts &&
+                  filteredProducts?.slice(0, 6)?.map((p, idx) => {
                     return (
                       <div key={idx} class="col-lg-4 col-md-6 item-entry mb-4">
                         <Link
@@ -98,35 +137,37 @@ const Shop = () => {
                   </strong>
                 </div> */}
               </div>
-              <div class="row">
-                <div class="col-md-12 text-center">
-                  <div class="site-block-27">
-                    <ul>
-                      <li>
-                        <a href="#">&lt;</a>
-                      </li>
-                      <li class="active">
-                        <span>1</span>
-                      </li>
-                      <li>
-                        <a href="#">2</a>
-                      </li>
-                      <li>
-                        <a href="#">3</a>
-                      </li>
-                      <li>
-                        <a href="#">4</a>
-                      </li>
-                      <li>
-                        <a href="#">5</a>
-                      </li>
-                      <li>
-                        <a href="#">&gt;</a>
-                      </li>
-                    </ul>
+              {pagenation?.totalPages !== 1 && (
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <div class="site-block-27">
+                      <ul>
+                        <li>
+                          <a href="#">&lt;</a>
+                        </li>
+                        <li class="active">
+                          <span>1</span>
+                        </li>
+                        <li>
+                          <a href="#">2</a>
+                        </li>
+                        <li>
+                          <a href="#">3</a>
+                        </li>
+                        <li>
+                          <a href="#">4</a>
+                        </li>
+                        <li>
+                          <a href="#">5</a>
+                        </li>
+                        <li>
+                          <a href="#">&gt;</a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
 
             <div class="col-md-3 order-2 mb-5 mb-md-0">
@@ -168,18 +209,20 @@ const Shop = () => {
                   <h3 class="mb-3 h6 text-uppercase text-black d-block">
                     Categories
                   </h3>
-                  <label for="c_sm" class="d-flex">
-                    <input type="checkbox" id="c_sm" class="mr-2 mt-1" />
-                    <span class="text-black">Men (2,319)</span>
-                  </label>
-                  <label for="c_md" class="d-flex">
-                    <input type="checkbox" id="c_md" class="mr-2 mt-1" />
-                    <span class="text-black">Woman (1,282)</span>
-                  </label>
-                  <label for="c_lg" class="d-flex">
-                    <input type="checkbox" id="c_lg" class="mr-2 mt-1" />
-                    <span class="text-black">Children (1,392)</span>
-                  </label>
+                  <div class="form-group">
+                    <select
+                      value={selectedCategoryId}
+                      class="form-control"
+                      id="categoryFormSelect"
+                      onChange={handleCategoryOnChange}
+                    >
+                      <option value={""}>Select category</option>
+                      {categories &&
+                        categories?.map((c) => {
+                          return <option value={c._id}>{c.name}</option>;
+                        })}
+                    </select>
+                  </div>
                 </div>
 
                 <div class="mb-4">
