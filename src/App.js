@@ -15,6 +15,7 @@ import Contact from "./pages/contact";
 import ShopSingle from "./pages/shopSingle";
 import Cart from "./pages/cart";
 import Checkout from "./pages/checkout";
+import ThankYou from "./pages/thankYou";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/thankyou" element={<ThankYou />} />
           </Route>
         </Routes>
       </Provider>
