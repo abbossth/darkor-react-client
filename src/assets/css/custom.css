@@ -10,6 +10,10 @@ html {
   overflow-x: hidden;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .dr-single-product-title {
   margin: 0;
 }
