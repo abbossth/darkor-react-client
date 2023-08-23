@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
 import { ScrollToTop } from "../plugins/custom";
 import axios from "../api/axios";
-import FilterCheckbox from "../components/filterCheckbox";
 
 const Shop = () => {
   const { products } = useSelector((state) => state.productsReducer);
