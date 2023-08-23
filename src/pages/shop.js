@@ -1,6 +1,7 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ScrollToTop } from "../plugins/custom";
 
 const Shop = () => {
   const { products } = useSelector((state) => state.productsReducer);
@@ -10,7 +11,7 @@ const Shop = () => {
         <div class="container">
           <div class="row">
             <div class="col-md-12 mb-0">
-              <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span>
+              <Link to="/">Home</Link> <span class="mx-2 mb-0">/</span>
               <strong class="text-black">Shop</strong>
             </div>
           </div>
@@ -66,13 +67,16 @@ const Shop = () => {
                           class="product-item md-height bg-gray d-block"
                         >
                           <img
+                            onClick={ScrollToTop}
                             src={`${p.image}`}
                             alt="Image"
                             class="img-fluid"
                           />
                         </Link>
                         <h2 class="item-title">
-                          <Link to={`/product/${p._id}`}>{p.name}</Link>
+                          <span onClick={ScrollToTop}>
+                            <Link to={`/product/${p._id}`}>{p.name}</Link>
+                          </span>
                         </h2>
                         <strong class="item-price">{p.price} UZS</strong>
                       </div>

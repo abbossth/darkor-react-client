@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ScrollToTop } from "../plugins/custom";
 
 const PopularProducts = () => {
   const { products } = useSelector((state) => state.productsReducer);
@@ -21,9 +22,14 @@ const PopularProducts = () => {
                     to={`/product/${p._id}`}
                     class="product-item md-height bg-gray d-block"
                   >
-                    <img src={`${p.image}`} alt="Image" class="img-fluid" />
+                    <img
+                      src={`${p.image}`}
+                      alt="Image"
+                      class="img-fluid"
+                      onClick={ScrollToTop}
+                    />
                   </Link>
-                  <h2 class="item-title">
+                  <h2 class="item-title" onClick={ScrollToTop}>
                     <Link to={`/product/${p._id}`}>{p.name}</Link>
                   </h2>
                   <strong class="item-price">{p.price} UZS</strong>
