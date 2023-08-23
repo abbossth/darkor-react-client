@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, updateQuantity } from "../store/actions/cartItems";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ScrollToTop } from "../plugins/custom";
 
 const Cart = () => {
   const { items, cartTotal, totalCount } = useSelector(
@@ -132,7 +133,10 @@ const Cart = () => {
               <div class="row mb-5">
                 <div class="col-md-6">
                   <Link to="/shop">
-                    <button class="btn btn-outline-primary btn-sm btn-block">
+                    <button
+                      class="btn btn-outline-primary btn-sm btn-block"
+                      onClick={ScrollToTop}
+                    >
                       Continue Shopping
                     </button>
                   </Link>
