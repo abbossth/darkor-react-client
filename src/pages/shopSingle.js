@@ -54,6 +54,11 @@ const ShopSingle = () => {
   useEffect(() => {
     fetchSingleProduct();
   }, [productId]);
+
+  useEffect(() => {
+    ScrollToTop();
+  }, []);
+
   return (
     <>
       <div className="bg-light py-3">
@@ -73,7 +78,10 @@ const ShopSingle = () => {
             <div className="row">
               <div className="col-md-6">
                 <div className="item-entry">
-                  <a href="#" className="product-item md-height bg-gray d-block">
+                  <a
+                    href="#"
+                    className="product-item md-height bg-gray d-block"
+                  >
                     <img
                       src={`${product?.image}`}
                       alt="Image"
@@ -91,7 +99,9 @@ const ShopSingle = () => {
                 </div>
                 <p>{product.description}</p>
                 <p>
-                  <strong className="text-primary h4">{product.price} UZS</strong>
+                  <strong className="text-primary h4">
+                    {product.price} UZS
+                  </strong>
                 </p>
                 <div className="mb-1 d-flex">
                   <label htmlFor="option-sm" className="d-flex mr-3 mb-3">
@@ -128,11 +138,17 @@ const ShopSingle = () => {
                     >
                       <input type="radio" id="option-xl" name="shop-sizes" />
                     </span>
-                    <span className="d-inline-block text-black"> Extra Large</span>
+                    <span className="d-inline-block text-black">
+                      {" "}
+                      Extra Large
+                    </span>
                   </label>
                 </div>
                 <div className="mb-5">
-                  <div className="input-group mb-3" style={{ maxWidth: "120px" }}>
+                  <div
+                    className="input-group mb-3"
+                    style={{ maxWidth: "120px" }}
+                  >
                     <div className="input-group-prepend">
                       <button
                         onClick={handleCountMinus}
