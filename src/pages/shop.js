@@ -98,13 +98,16 @@ const Shop = () => {
                 {filteredProducts &&
                   filteredProducts?.slice(0, 6)?.map((p, idx) => {
                     return (
-                      <div key={idx} className="col-lg-4 col-md-6 item-entry mb-4">
+                      <div
+                        key={idx}
+                        className="col-lg-4 col-md-6 item-entry mb-4"
+                      >
                         <Link
                           to={`/product/${p._id}`}
+                          onClick={ScrollToTop}
                           className="product-item md-height bg-gray d-block"
                         >
                           <img
-                            onClick={ScrollToTop}
                             src={`${p.image}`}
                             alt="Image"
                             className="img-fluid"
@@ -217,7 +220,11 @@ const Shop = () => {
                       <option value={""}>Select category</option>
                       {categories &&
                         categories?.map((c) => {
-                          return <option key={c._id} value={c._id}>{c.name}</option>;
+                          return (
+                            <option key={c._id} value={c._id}>
+                              {c.name}
+                            </option>
+                          );
                         })}
                     </select>
                   </div>

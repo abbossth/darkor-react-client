@@ -73,34 +73,35 @@ const Cart = () => {
                             <td>{i.size}</td>
                             <td>
                               <div
-                                className="input-group mb-3"
-                                style={{ maxWidth: "120px" }}
+                                className="input-group"
+                                style={{
+                                  width: "100%",
+                                  maxWidth: "120px",
+                                  margin: "auto",
+                                }}
                               >
                                 <div className="input-group-prepend">
                                   <button
                                     onClick={() =>
                                       handleCountMinus(i._id, i.quantity)
                                     }
-                                    className="btn btn-outline-primary js-btn-minus"
+                                    className="btn btn-outline-primary js-btn-minus btn-md"
                                     type="button"
                                   >
                                     &minus;
                                   </button>
                                 </div>
-                                <input
-                                  type="text"
-                                  className="form-control text-center"
-                                  value={i.quantity}
-                                  placeholder=""
-                                  aria-label="Example text with button addon"
-                                  aria-describedby="button-addon1"
-                                />
+                                <div className="bg-white d-flex align-items-center px-2 border">
+                                  <span className="text-center">
+                                    {i.quantity}
+                                  </span>
+                                </div>
                                 <div className="input-group-append">
                                   <button
                                     onClick={() =>
                                       handleCountPlus(i._id, i.quantity)
                                     }
-                                    className="btn btn-outline-primary js-btn-plus"
+                                    className="btn btn-outline-primary js-btn-plus btn-md"
                                     type="button"
                                   >
                                     &#43;
@@ -112,7 +113,7 @@ const Cart = () => {
                             <td>
                               <span
                                 onClick={() => handleRemoveFromCart(i._id)}
-                                className="btn btn-primary height-auto btn-sm"
+                                className="btn btn-danger height-auto btn-sm"
                               >
                                 X
                               </span>
