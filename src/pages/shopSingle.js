@@ -145,7 +145,7 @@ const ShopSingle = () => {
                     <input
                       type="text"
                       className="form-control text-center"
-                      defaultValue={productCount || 0}
+                      value={productCount || 0}
                       placeholder=""
                       aria-label="Example text with button addon"
                       aria-describedby="button-addon1"

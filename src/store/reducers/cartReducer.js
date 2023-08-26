@@ -12,7 +12,6 @@ const cartReducer = (state = initialState, action) => {
       const existingItem = state.items.find(
         (item) => item._id === action.payload._id
       );
-      console.log(action.payload._id);
       if (existingItem) {
         // If yes, update the quantity
         return {
@@ -55,7 +54,6 @@ const cartReducer = (state = initialState, action) => {
       const product = state.items.find(
         (item) => item._id === action.payload._id
       );
-      console.log(product?.quantity, action.payload.quantity);
       if (product?.quantity < action.payload.quantity) {
         return {
           ...state,

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ScrollToTop } from "../plugins/custom";
+import ReactInputMask from "react-input-mask";
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const { items, cartTotal } = useSelector((state) => state.cartReducer);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -12,20 +14,32 @@ const Checkout = () => {
   const [message, setMessage] = useState("");
   const [clientId, setClientId] = useState("");
   const [products, setProducts] = useState([]);
-  const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
+  const [validationErrors, setValidationErrors] = useState([])
+  const [nameError, setNameError] = useState("")
+  const [addressError, setAddressError] = useState("")
+  const [phoneNumberError, setPhoneNumberError] = useState("")
+  const [nameFocus, setNameFocus] = useState(false)
+  const [phoneFocus, setPhoneFocus] = useState(false)
+  const [addressFocus, setAddressFocus] = useState(false)
 
   const createNewClient = async () => {
+    if (cartTotal === 0) return alert("Please add items to cart first.")
+    if (!name.length || phone.includes("_") || !address.length) return alert(`Please fill all the required fields of form and try again!`)
     try {
       const res = await axios.post("/api/v1/clients/create", {
         name,
         address,
-        phone,
+        phone: `${phone[6]}${phone[7]}${phone[10]}${phone[11]}${phone[12]}${phone[14]}${phone[15]}${phone[17]}${phone[18]}`,
         message,
       });
       setClientId(res?.data?.data?.data?.client?._id);
     } catch (err) {
-      console.log(`Unhandled Error while creating client ${err}`);
+      switch (err?.response?.data?.error?.code) {
+        case 3:
+          return setValidationErrors(err?.response?.data?.data);
+        default:
+          console.log(`Unhandled Error while creating client ${err}`);
+      }      
     }
   };
 
@@ -62,6 +76,21 @@ const Checkout = () => {
     }
   }, [clientId]);
 
+  useEffect(() => {
+    validationErrors.forEach(v => {
+      switch (v?.path) {
+        case "phone":
+          return setPhoneNumberError(v?.msg)
+        case "name":
+          return setNameError(v?.msg)
+        case "address":
+          return setAddressError(v?.msg)
+        default:
+          console.log(`Unhandled Error in Validations ${v}`);
+      }
+    })
+  }, [validationErrors])
+
   return (
     <>
       <div className="bg-light py-3">
@@ -94,25 +123,37 @@ const Checkout = () => {
                       name="c_companyname"
                       placeholder="Ismingizni kiriting..."
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
+                      onChange={(e) => {
+                        setName(e.target.value)
+                      }}
+                      onBlur={() => setNameFocus(true)}
+                      />
+                      {
+                        nameFocus && !name.length && <small className="text-danger">{nameError || "Invalid Value"}</small>
+                      }
                   </div>
                 </div>
 
                 <div className="form-group row">
                   <div className="col-md-12">
-                    <label htmlFor="c_companyname" className="text-black">
+                    <label htmlFor="c_phonenumber" className="text-black">
                       Phone number <span className="text-danger">*</span>
                     </label>
-                    <input
+                    <ReactInputMask
+                      mask="+\9\9\8 (99) 999-99-99"
+                      maskChar={"_"}
                       type="text"
                       className="form-control"
-                      id="c_companyname"
-                      name="c_companyname"
+                      id="c_phonenumber"
+                      alwaysShowMask="true"
                       placeholder="Telefon raqamingizni kiriting..."
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
+                      onBlur={() => setPhoneFocus(true)}
                     />
+                    {
+                      phoneFocus && (phone.includes("_") || !phone.length ) && <small className="text-danger">{phoneNumberError || "Invalid Value"}</small>
+                    }
                   </div>
                 </div>
 
@@ -129,7 +170,11 @@ const Checkout = () => {
                       placeholder="Street address"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
+                      onBlur={() => setAddressFocus(true)}
                     />
+                    {
+                      addressFocus && !address.length && <small className="text-danger">{addressError || "Address cannot be empty"}</small>
+                    }
                   </div>
                 </div>
 
@@ -187,7 +232,6 @@ const Checkout = () => {
                     <div className="form-group">
                       <button
                         className="btn btn-primary btn-lg btn-block"
-                        // onclick="window.location='thankyou.html'"
                         onClick={createNewClient}
                       >
                         Place Order
