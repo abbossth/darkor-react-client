@@ -9,44 +9,44 @@ const Navbar = () => {
   const { totalCount } = useSelector((state) => state.cartReducer);
   return (
     <>
-      <div class="site-navbar bg-white py-2">
-        <div class="search-wrap">
-          <div class="container">
-            <Link to="/" class="search-close js-search-close">
-              <span class="icon-close2"></span>
+      <div className="site-navbar bg-white py-2">
+        <div className="search-wrap">
+          <div className="container">
+            <Link to="/" className="search-close js-search-close">
+              <span className="icon-close2"></span>
             </Link>
             <form action="#" method="post">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Search keyword and hit enter..."
               />
             </form>
           </div>
         </div>
 
-        <div class="container">
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="logo">
-              <div class="site-logo">
-                <Link to="/" class="js-logo-clone">
+        <div className="container">
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="logo">
+              <div className="site-logo">
+                <Link to="/" className="js-logo-clone">
                   DARKOR
                 </Link>
               </div>
             </div>
-            <div class="main-nav d-none d-lg-block">
+            <div className="main-nav d-none d-lg-block">
               <nav
-                class="site-navigation text-right text-md-center"
+                className="site-navigation text-right text-md-center"
                 role="navigation"
               >
-                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <ul className="site-menu js-clone-nav d-none d-lg-block">
                   <li
-                    class={`has-children ${
+                    className={`has-children ${
                       location.pathname === "/" ? "active" : ""
                     }`}
                   >
                     <Link to="/">Home</Link>
-                    <ul class="dropdown">
+                    <ul className="dropdown">
                       <li>
                         <Link to="/#categories">Categories</Link>
                       </li>
@@ -57,12 +57,12 @@ const Navbar = () => {
                   </li>
 
                   <li
-                    class={`${location.pathname === "/shop" ? "active" : ""}`}
+                    className={`${location.pathname === "/shop" ? "active" : ""}`}
                   >
                     <Link to="/shop">Shop</Link>
                   </li>
                   <li
-                    class={`${
+                    className={`${
                       location.pathname === "/contact" ? "active" : ""
                     }`}
                   >
@@ -71,22 +71,22 @@ const Navbar = () => {
                 </ul>
               </nav>
             </div>
-            <div class="icons">
-              <Link to="#" class="icons-btn d-inline-block js-search-open">
-                <span class="icon-search"></span>
+            <div className="icons">
+              <Link to="#" className="icons-btn d-inline-block js-search-open">
+                <span className="icon-search"></span>
               </Link>
-              <Link to="#" class="icons-btn d-inline-block">
-                <span class="icon-heart-o"></span>
+              <Link to="#" className="icons-btn d-inline-block">
+                <span className="icon-heart-o"></span>
               </Link>
-              <Link to="/cart" class="icons-btn d-inline-block bag">
-                <span class="icon-shopping-bag"></span>
-                <span class="number">{totalCount}</span>
+              <Link to="/cart" className="icons-btn d-inline-block bag">
+                <span className="icon-shopping-bag"></span>
+                <span className="number">{totalCount}</span>
               </Link>
               <div
                 onClick={handleMenuOpen}
-                class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"
+                className="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"
               >
-                <span class="icon-menu"></span>
+                <span className="icon-menu"></span>
               </div>
             </div>
           </div>

@@ -3,87 +3,87 @@ import React from "react";
 const Contact = () => {
   return (
     <>
-      <div class="site-blocks-cover inner-page contact-page-cover" data-aos="fade">
-        <div class="container">
-          <div class="row"></div>
+      <div className="site-blocks-cover inner-page contact-page-cover" data-aos="fade">
+        <div className="container">
+          <div className="row"></div>
         </div>
       </div>
 
-      <div class="custom-border-bottom py-3">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 mb-0">
-              <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span>
-              <strong class="text-black">Contact</strong>
+      <div className="custom-border-bottom py-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 mb-0">
+              <a href="index.html">Home</a> <span className="mx-2 mb-0">/</span>
+              <strong className="text-black">Contact</strong>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="site-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <h2 class="h3 mb-3 text-black">Get In Touch</h2>
+      <div className="site-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <h2 className="h3 mb-3 text-black">Get In Touch</h2>
             </div>
-            <div class="col-md-7">
+            <div className="col-md-7">
               <form action="#" method="post">
-                <div class="p-3 p-lg-5 border">
-                  <div class="form-group row">
-                    <div class="col-md-6">
-                      <label for="c_fname" class="text-black">
-                        First Name <span class="text-danger">*</span>
+                <div className="p-3 p-lg-5 border">
+                  <div className="form-group row">
+                    <div className="col-md-6">
+                      <label htmlFor="c_fname" className="text-black">
+                        First Name <span className="text-danger">*</span>
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="c_fname"
                         name="c_fname"
                       />
                     </div>
-                    <div class="col-md-6">
-                      <label for="c_lname" class="text-black">
-                        Last Name <span class="text-danger">*</span>
+                    <div className="col-md-6">
+                      <label htmlFor="c_lname" className="text-black">
+                        Last Name <span className="text-danger">*</span>
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="c_lname"
                         name="c_lname"
                       />
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <div class="col-md-12">
-                      <label for="c_email" class="text-black">
-                        Email <span class="text-danger">*</span>
+                  <div className="form-group row">
+                    <div className="col-md-12">
+                      <label htmlFor="c_email" className="text-black">
+                        Email <span className="text-danger">*</span>
                       </label>
                       <input
                         type="email"
-                        class="form-control"
+                        className="form-control"
                         id="c_email"
                         name="c_email"
                         placeholder=""
                       />
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <div class="col-md-12">
-                      <label for="c_subject" class="text-black">
+                  <div className="form-group row">
+                    <div className="col-md-12">
+                      <label htmlFor="c_subject" className="text-black">
                         Subject
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="c_subject"
                         name="c_subject"
                       />
                     </div>
                   </div>
 
-                  <div class="form-group row">
-                    <div class="col-md-12">
-                      <label for="c_message" class="text-black">
+                  <div className="form-group row">
+                    <div className="col-md-12">
+                      <label htmlFor="c_message" className="text-black">
                         Message
                       </label>
                       <textarea
@@ -91,15 +91,15 @@ const Contact = () => {
                         id="c_message"
                         cols="30"
                         rows="7"
-                        class="form-control"
+                        className="form-control"
                       ></textarea>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <div class="col-lg-12">
+                  <div className="form-group row">
+                    <div className="col-lg-12">
                       <input
                         type="submit"
-                        class="btn btn-primary btn-lg btn-block"
+                        className="btn btn-primary btn-lg btn-block"
                         value="Send Message"
                       />
                     </div>
@@ -107,28 +107,28 @@ const Contact = () => {
                 </div>
               </form>
             </div>
-            <div class="col-md-5 ml-auto">
-              <div class="p-4 border mb-3">
-                <span class="d-block text-primary h6 text-uppercase">
+            <div className="col-md-5 ml-auto">
+              <div className="p-4 border mb-3">
+                <span className="d-block text-primary h6 text-uppercase">
                   New York
                 </span>
-                <p class="mb-0">
+                <p className="mb-0">
                   203 Fake St. Mountain View, San Francisco, California, USA
                 </p>
               </div>
-              <div class="p-4 border mb-3">
-                <span class="d-block text-primary h6 text-uppercase">
+              <div className="p-4 border mb-3">
+                <span className="d-block text-primary h6 text-uppercase">
                   London
                 </span>
-                <p class="mb-0">
+                <p className="mb-0">
                   203 Fake St. Mountain View, San Francisco, California, USA
                 </p>
               </div>
-              <div class="p-4 border mb-3">
-                <span class="d-block text-primary h6 text-uppercase">
+              <div className="p-4 border mb-3">
+                <span className="d-block text-primary h6 text-uppercase">
                   Canada
                 </span>
-                <p class="mb-0">
+                <p className="mb-0">
                   203 Fake St. Mountain View, San Francisco, California, USA
                 </p>
               </div>

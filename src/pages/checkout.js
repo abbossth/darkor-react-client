@@ -64,32 +64,32 @@ const Checkout = () => {
 
   return (
     <>
-      <div class="bg-light py-3">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 mb-0">
-              <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span>
-              <a href="cart.html">Cart</a> <span class="mx-2 mb-0">/</span>
-              <strong class="text-black">Checkout</strong>
+      <div className="bg-light py-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 mb-0">
+              <a href="index.html">Home</a> <span className="mx-2 mb-0">/</span>
+              <a href="cart.html">Cart</a> <span className="mx-2 mb-0">/</span>
+              <strong className="text-black">Checkout</strong>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="site-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 mb-5 mb-md-0">
-              <h2 class="h3 mb-3 text-black">Billing Details</h2>
-              <div class="p-3 p-lg-5 border">
-                <div class="form-group row">
-                  <div class="col-md-12">
-                    <label for="c_companyname" class="text-black">
-                      Full Name <span class="text-danger">*</span>
+      <div className="site-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 mb-5 mb-md-0">
+              <h2 className="h3 mb-3 text-black">Billing Details</h2>
+              <div className="p-3 p-lg-5 border">
+                <div className="form-group row">
+                  <div className="col-md-12">
+                    <label htmlFor="c_companyname" className="text-black">
+                      Full Name <span className="text-danger">*</span>
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="c_companyname"
                       name="c_companyname"
                       placeholder="Ismingizni kiriting..."
@@ -99,14 +99,14 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <div class="col-md-12">
-                    <label for="c_companyname" class="text-black">
-                      Phone number <span class="text-danger">*</span>
+                <div className="form-group row">
+                  <div className="col-md-12">
+                    <label htmlFor="c_companyname" className="text-black">
+                      Phone number <span className="text-danger">*</span>
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="c_companyname"
                       name="c_companyname"
                       placeholder="Telefon raqamingizni kiriting..."
@@ -116,14 +116,14 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <div class="col-md-12">
-                    <label for="c_diff_address" class="text-black">
-                      Address <span class="text-danger">*</span>
+                <div className="form-group row">
+                  <div className="col-md-12">
+                    <label htmlFor="c_diff_address" className="text-black">
+                      Address <span className="text-danger">*</span>
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="c_diff_address"
                       name="c_diff_address"
                       placeholder="Street address"
@@ -133,8 +133,8 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="c_order_notes" class="text-black">
+                <div className="form-group">
+                  <label htmlFor="c_order_notes" className="text-black">
                     Order Notes
                   </label>
                   <textarea
@@ -142,7 +142,7 @@ const Checkout = () => {
                     id="c_order_notes"
                     cols="30"
                     rows="5"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Write your notes here..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -150,12 +150,12 @@ const Checkout = () => {
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="row mb-5">
-                <div class="col-md-12">
-                  <h2 class="h3 mb-3 text-black">Your Order</h2>
-                  <div class="p-3 p-lg-5 border">
-                    <table class="table site-block-order-table mb-5">
+            <div className="col-md-6">
+              <div className="row mb-5">
+                <div className="col-md-12">
+                  <h2 className="h3 mb-3 text-black">Your Order</h2>
+                  <div className="p-3 p-lg-5 border">
+                    <table className="table site-block-order-table mb-5">
                       <thead>
                         <th>Product</th>
                         <th>Total</th>
@@ -166,7 +166,7 @@ const Checkout = () => {
                             return (
                               <tr>
                                 <td>
-                                  {i.name} <strong class="mx-2">x</strong>{" "}
+                                  {i.name} <strong className="mx-2">x</strong>{" "}
                                   {i.quantity}
                                 </td>
                                 <td>{i.price * i.quantity} UZS</td>
@@ -174,19 +174,19 @@ const Checkout = () => {
                             );
                           })}
                         <tr>
-                          <td class="text-black font-weight-bold">
+                          <td className="text-black font-weight-bold">
                             <strong>Order Total</strong>
                           </td>
-                          <td class="text-black font-weight-bold">
+                          <td className="text-black font-weight-bold">
                             <strong>{cartTotal} UZS</strong>
                           </td>
                         </tr>
                       </tbody>
                     </table>
 
-                    <div class="form-group">
+                    <div className="form-group">
                       <button
-                        class="btn btn-primary btn-lg btn-block"
+                        className="btn btn-primary btn-lg btn-block"
                         // onclick="window.location='thankyou.html'"
                         onClick={createNewClient}
                       >

@@ -56,87 +56,87 @@ const ShopSingle = () => {
   }, [productId]);
   return (
     <>
-      <div class="bg-light py-3">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 mb-0">
-              <Link to="/">Home</Link> <span class="mx-2 mb-0">/</span>
-              <Link to="/shop">Shop</Link> <span class="mx-2 mb-0">/</span>
-              <strong class="text-black">{product?.name}</strong>
+      <div className="bg-light py-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 mb-0">
+              <Link to="/">Home</Link> <span className="mx-2 mb-0">/</span>
+              <Link to="/shop">Shop</Link> <span className="mx-2 mb-0">/</span>
+              <strong className="text-black">{product?.name}</strong>
             </div>
           </div>
         </div>
       </div>
       {product && (
-        <div class="site-section">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="item-entry">
-                  <a href="#" class="product-item md-height bg-gray d-block">
+        <div className="site-section">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="item-entry">
+                  <a href="#" className="product-item md-height bg-gray d-block">
                     <img
                       src={`${product?.image}`}
                       alt="Image"
-                      class="img-fluid"
+                      className="img-fluid"
                     />
                   </a>
                 </div>
               </div>
-              <div class="col-md-6">
-                <h2 class="text-black dr-single-product-title">
+              <div className="col-md-6">
+                <h2 className="text-black dr-single-product-title">
                   {product?.name}
                 </h2>
-                <div class="dr-single-page-product-badge">
+                <div className="dr-single-page-product-badge">
                   {product?.categoryId.name}
                 </div>
                 <p>{product.description}</p>
                 <p>
-                  <strong class="text-primary h4">{product.price} UZS</strong>
+                  <strong className="text-primary h4">{product.price} UZS</strong>
                 </p>
-                <div class="mb-1 d-flex">
-                  <label for="option-sm" class="d-flex mr-3 mb-3">
+                <div className="mb-1 d-flex">
+                  <label htmlFor="option-sm" className="d-flex mr-3 mb-3">
                     <span
-                      class="d-inline-block mr-2"
+                      className="d-inline-block mr-2"
                       style={{ top: "-2px", position: "relative" }}
                     >
                       <input type="radio" id="option-sm" name="shop-sizes" />
                     </span>
-                    <span class="d-inline-block text-black">Small</span>
+                    <span className="d-inline-block text-black">Small</span>
                   </label>
-                  <label for="option-md" class="d-flex mr-3 mb-3">
+                  <label htmlFor="option-md" className="d-flex mr-3 mb-3">
                     <span
-                      class="d-inline-block mr-2"
+                      className="d-inline-block mr-2"
                       style={{ top: "-2px", position: "relative" }}
                     >
                       <input type="radio" id="option-md" name="shop-sizes" />
                     </span>
-                    <span class="d-inline-block text-black">Medium</span>
+                    <span className="d-inline-block text-black">Medium</span>
                   </label>
-                  <label for="option-lg" class="d-flex mr-3 mb-3">
+                  <label htmlFor="option-lg" className="d-flex mr-3 mb-3">
                     <span
-                      class="d-inline-block mr-2"
+                      className="d-inline-block mr-2"
                       style={{ top: "-2px", position: "relative" }}
                     >
                       <input type="radio" id="option-lg" name="shop-sizes" />
                     </span>
-                    <span class="d-inline-block text-black">Large</span>
+                    <span className="d-inline-block text-black">Large</span>
                   </label>
-                  <label for="option-xl" class="d-flex mr-3 mb-3">
+                  <label htmlFor="option-xl" className="d-flex mr-3 mb-3">
                     <span
-                      class="d-inline-block mr-2"
+                      className="d-inline-block mr-2"
                       style={{ top: "-2px", position: "relative" }}
                     >
                       <input type="radio" id="option-xl" name="shop-sizes" />
                     </span>
-                    <span class="d-inline-block text-black"> Extra Large</span>
+                    <span className="d-inline-block text-black"> Extra Large</span>
                   </label>
                 </div>
-                <div class="mb-5">
-                  <div class="input-group mb-3" style={{ maxWidth: "120px" }}>
-                    <div class="input-group-prepend">
+                <div className="mb-5">
+                  <div className="input-group mb-3" style={{ maxWidth: "120px" }}>
+                    <div className="input-group-prepend">
                       <button
                         onClick={handleCountMinus}
-                        class="btn btn-outline-primary js-btn-minus"
+                        className="btn btn-outline-primary js-btn-minus"
                         type="button"
                       >
                         &minus;
@@ -144,16 +144,16 @@ const ShopSingle = () => {
                     </div>
                     <input
                       type="text"
-                      class="form-control text-center"
-                      value={productCount || 0}
+                      className="form-control text-center"
+                      defaultValue={productCount || 0}
                       placeholder=""
                       aria-label="Example text with button addon"
                       aria-describedby="button-addon1"
                     />
-                    <div class="input-group-append">
+                    <div className="input-group-append">
                       <button
                         onClick={handleCountPlus}
-                        class="btn btn-outline-primary js-btn-plus"
+                        className="btn btn-outline-primary js-btn-plus"
                         type="button"
                       >
                         &#43;
@@ -164,7 +164,7 @@ const ShopSingle = () => {
                 <p>
                   <button
                     onClick={handleAddToCart}
-                    class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary"
+                    className="buy-now btn btn-sm height-auto px-4 py-3 btn-primary"
                   >
                     Add To Cart
                   </button>
@@ -174,35 +174,35 @@ const ShopSingle = () => {
           </div>
         </div>
       )}
-      <div class="site-section block-3 site-blocks-2">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-7 site-section-heading text-center pt-4">
+      <div className="site-section block-3 site-blocks-2">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-md-7 site-section-heading text-center pt-4">
               <h2>Featured Products</h2>
             </div>
           </div>
-          <div class="row">
+          <div className="row">
             {products &&
               products?.slice(0, 6)?.map((p, idx) => {
                 return (
-                  <div key={idx} class="col-lg-4 col-md-6 item-entry mb-4">
+                  <div key={idx} className="col-lg-4 col-md-6 item-entry mb-4">
                     <Link
                       to={`/product/${p._id}`}
-                      class="product-item md-height bg-gray d-block"
+                      className="product-item md-height bg-gray d-block"
                     >
                       <img
                         onClick={ScrollToTop}
                         src={`${p.image}`}
                         alt="Image"
-                        class="img-fluid"
+                        className="img-fluid"
                       />
                     </Link>
-                    <h2 class="item-title">
+                    <h2 className="item-title">
                       <div onClick={ScrollToTop}>
                         <Link to={`/product/${p._id}`}>{p.name}</Link>
                       </div>
                     </h2>
-                    <strong class="item-price">{p.price} UZS</strong>
+                    <strong className="item-price">{p.price} UZS</strong>
                   </div>
                 );
               })}

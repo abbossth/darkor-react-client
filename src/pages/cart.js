@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, updateQuantity } from "../store/actions/cartItems";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ScrollToTop } from "../plugins/custom";
 
@@ -9,7 +8,6 @@ const Cart = () => {
     (state) => state.cartReducer
   );
   const dispatch = useDispatch();
-  console.log("items", items);
 
   function handleRemoveFromCart(itemId) {
     dispatch(removeFromCart(itemId));
@@ -28,62 +26,62 @@ const Cart = () => {
 
   return (
     <>
-      <div class="bg-light py-3">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 mb-0">
-              <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span>
-              <strong class="text-black">Cart</strong>
+      <div className="bg-light py-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 mb-0">
+              <a href="index.html">Home</a> <span className="mx-2 mb-0">/</span>
+              <strong className="text-black">Cart</strong>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="site-section">
-        <div class="container">
-          <div class="row mb-5">
-            <form class="col-md-12" method="post">
-              <div class="site-blocks-table">
-                <table class="table table-bordered">
+      <div className="site-section">
+        <div className="container">
+          <div className="row mb-5">
+            <form className="col-md-12" method="post">
+              <div className="site-blocks-table">
+                <table className="table table-bordered">
                   <thead>
                     <tr>
-                      <th class="product-thumbnail">Image</th>
-                      <th class="product-name">Product</th>
-                      <th class="product-price">Price</th>
-                      <th class="product-price">Size</th>
-                      <th class="product-quantity">Quantity</th>
-                      <th class="product-total">Total</th>
-                      <th class="product-remove">Remove</th>
+                      <th className="product-thumbnail">Image</th>
+                      <th className="product-name">Product</th>
+                      <th className="product-price">Price</th>
+                      <th className="product-price">Size</th>
+                      <th className="product-quantity">Quantity</th>
+                      <th className="product-total">Total</th>
+                      <th className="product-remove">Remove</th>
                     </tr>
                   </thead>
                   <tbody>
                     {items &&
-                      items?.map((i) => {
+                      items?.map((i, idx) => {
                         return (
-                          <tr>
-                            <td class="product-thumbnail">
+                          <tr key={idx} >
+                            <td className="product-thumbnail">
                               <img
                                 src={`${i.image}`}
                                 alt="Image"
-                                class="img-fluid"
+                                className="img-fluid"
                               />
                             </td>
-                            <td class="product-name">
-                              <h2 class="h5 text-black">{i.name}</h2>
+                            <td className="product-name">
+                              <h2 className="h5 text-black">{i.name}</h2>
                             </td>
                             <td>{i.price} UZS</td>
                             <td>{i.size}</td>
                             <td>
                               <div
-                                class="input-group mb-3"
+                                className="input-group mb-3"
                                 style={{ maxWidth: "120px" }}
                               >
-                                <div class="input-group-prepend">
+                                <div className="input-group-prepend">
                                   <button
                                     onClick={() =>
                                       handleCountMinus(i._id, i.quantity)
                                     }
-                                    class="btn btn-outline-primary js-btn-minus"
+                                    className="btn btn-outline-primary js-btn-minus"
                                     type="button"
                                   >
                                     &minus;
@@ -91,18 +89,18 @@ const Cart = () => {
                                 </div>
                                 <input
                                   type="text"
-                                  class="form-control text-center"
+                                  className="form-control text-center"
                                   value={i.quantity}
                                   placeholder=""
                                   aria-label="Example text with button addon"
                                   aria-describedby="button-addon1"
                                 />
-                                <div class="input-group-append">
+                                <div className="input-group-append">
                                   <button
                                     onClick={() =>
                                       handleCountPlus(i._id, i.quantity)
                                     }
-                                    class="btn btn-outline-primary js-btn-plus"
+                                    className="btn btn-outline-primary js-btn-plus"
                                     type="button"
                                   >
                                     &#43;
@@ -114,7 +112,7 @@ const Cart = () => {
                             <td>
                               <span
                                 onClick={() => handleRemoveFromCart(i._id)}
-                                class="btn btn-primary height-auto btn-sm"
+                                className="btn btn-primary height-auto btn-sm"
                               >
                                 X
                               </span>
@@ -128,13 +126,13 @@ const Cart = () => {
             </form>
           </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              <div class="row mb-5">
-                <div class="col-md-6">
+          <div className="row">
+            <div className="col-md-6">
+              <div className="row mb-5">
+                <div className="col-md-6">
                   <Link to="/shop">
                     <button
-                      class="btn btn-outline-primary btn-sm btn-block"
+                      className="btn btn-outline-primary btn-sm btn-block"
                       onClick={ScrollToTop}
                     >
                       Continue Shopping
@@ -143,31 +141,31 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <div class="col-md-6 pl-5">
-              <div class="row justify-content-end">
-                <div class="col-md-7">
-                  <div class="row">
-                    <div class="col-md-12 text-right border-bottom mb-5">
-                      <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+            <div className="col-md-6 pl-5">
+              <div className="row justify-content-end">
+                <div className="col-md-7">
+                  <div className="row">
+                    <div className="col-md-12 text-right border-bottom mb-5">
+                      <h3 className="text-black h4 text-uppercase">Cart Totals</h3>
                     </div>
                   </div>
-                  <div class="row mb-5">
-                    <div class="col-md-6">
-                      <b class="text-black fw-bold">Total</b>
+                  <div className="row mb-5">
+                    <div className="col-md-6">
+                      <b className="text-black fw-bold">Total</b>
                     </div>
-                    <div class="col-md-6 text-right">
-                      <span class="text-black">{cartTotal} UZS</span>
+                    <div className="col-md-6 text-right">
+                      <span className="text-black">{cartTotal} UZS</span>
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-12">
+                  <div className="row">
+                    <div className="col-md-12">
                       {totalCount ? (
                         <Link
                           to={"/checkout"}
                           style={{ pointerEvents: totalCount ? "" : "none" }}
                         >
-                          <button class="btn btn-primary btn-lg btn-block">
+                          <button className="btn btn-primary btn-lg btn-block">
                             Proceed To Checkout
                           </button>
                         </Link>

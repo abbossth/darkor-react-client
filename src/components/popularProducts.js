@@ -6,33 +6,33 @@ import { ScrollToTop } from "../plugins/custom";
 const PopularProducts = () => {
   const { products } = useSelector((state) => state.productsReducer);
   return (
-    <section id="popular-products" class="site-section">
-      <div class="container">
-        <div class="row">
-          <div class="title-section mb-5 col-12">
-            <h2 class="text-uppercase">Popular Products</h2>
+    <section id="popular-products" className="site-section">
+      <div className="container">
+        <div className="row">
+          <div className="title-section mb-5 col-12">
+            <h2 className="text-uppercase">Popular Products</h2>
           </div>
         </div>
-        <div class="row">
+        <div className="row">
           {products &&
             products?.slice(0, 6)?.map((p, idx) => {
               return (
-                <div key={idx} class="col-lg-4 col-md-6 item-entry mb-4">
+                <div key={idx} className="col-lg-4 col-md-6 item-entry mb-4">
                   <Link
                     to={`/product/${p._id}`}
-                    class="product-item md-height bg-gray d-block"
+                    className="product-item md-height bg-gray d-block"
                   >
                     <img
                       src={`${p.image}`}
                       alt="Image"
-                      class="img-fluid"
+                      className="img-fluid"
                       onClick={ScrollToTop}
                     />
                   </Link>
-                  <h2 class="item-title" onClick={ScrollToTop}>
+                  <h2 className="item-title" onClick={ScrollToTop}>
                     <Link to={`/product/${p._id}`}>{p.name}</Link>
                   </h2>
-                  <strong class="item-price">{p.price} UZS</strong>
+                  <strong className="item-price">{p.price} UZS</strong>
                 </div>
               );
             })}

@@ -4,28 +4,28 @@ import { Link } from "react-router-dom";
 const ThankYou = () => {
   return (
     <>
-      <div class="bg-light py-3">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 mb-0">
-              <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span>{" "}
-              <strong class="text-black">Thank You</strong>
+      <div className="bg-light py-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 mb-0">
+              <a href="index.html">Home</a> <span className="mx-2 mb-0">/</span>{" "}
+              <strong className="text-black">Thank You</strong>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="site-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <span class="icon-check_circle display-3 text-success"></span>
-              <h2 class="display-3 text-black">Thank you!</h2>
-              <p class="lead mb-5">You order was successfuly completed.</p>
+      <div className="site-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 text-center">
+              <span className="icon-check_circle display-3 text-success"></span>
+              <h2 className="display-3 text-black">Thank you!</h2>
+              <p className="lead mb-5">You order was successfuly completed.</p>
               <p>
                 <Link
                   to="/shop"
-                  class="btn btn-sm height-auto px-4 py-3 btn-primary"
+                  className="btn btn-sm height-auto px-4 py-3 btn-primary"
                 >
                   Back to shop
                 </Link>
