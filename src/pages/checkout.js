@@ -1,12 +1,14 @@
 import axios from "../api/axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ScrollToTop } from "../plugins/custom";
 import ReactInputMask from "react-input-mask";
+import { clearCart } from "../store/actions/cartItems";
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { items, cartTotal } = useSelector((state) => state.cartReducer);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -51,6 +53,7 @@ const Checkout = () => {
       });
       setClientId(null);
       ScrollToTop();
+      dispatch(clearCart())
       navigate("/thankyou", { replace: true });
     } catch (err) {
       console.log(`Unhandled Error while creating order ${err}`);
