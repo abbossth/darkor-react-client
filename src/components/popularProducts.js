@@ -21,13 +21,9 @@ const PopularProducts = () => {
                   <Link
                     to={`/product/${p._id}`}
                     className="product-item md-height bg-gray d-block"
+                    onClick={ScrollToTop}
                   >
-                    <img
-                      src={`${p.image}`}
-                      alt="Image"
-                      className="img-fluid"
-                      onClick={ScrollToTop}
-                    />
+                    <img src={`${p.image}`} alt="Image" className="img-fluid" />
                   </Link>
                   <h2 className="item-title" onClick={ScrollToTop}>
                     <Link to={`/product/${p._id}`}>{p.name}</Link>
