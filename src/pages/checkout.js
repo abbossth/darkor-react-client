@@ -1,7 +1,7 @@
 import axios from "../api/axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ScrollToTop } from "../plugins/custom";
 import ReactInputMask from "react-input-mask";
 import { clearCart } from "../store/actions/cartItems";
@@ -16,17 +16,21 @@ const Checkout = () => {
   const [message, setMessage] = useState("");
   const [clientId, setClientId] = useState("");
   const [products, setProducts] = useState([]);
-  const [validationErrors, setValidationErrors] = useState([])
-  const [nameError, setNameError] = useState("")
-  const [addressError, setAddressError] = useState("")
-  const [phoneNumberError, setPhoneNumberError] = useState("")
-  const [nameFocus, setNameFocus] = useState(false)
-  const [phoneFocus, setPhoneFocus] = useState(false)
-  const [addressFocus, setAddressFocus] = useState(false)
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [nameError, setNameError] = useState("");
+  const [addressError, setAddressError] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [nameFocus, setNameFocus] = useState(false);
+  const [phoneFocus, setPhoneFocus] = useState(false);
+  const [addressFocus, setAddressFocus] = useState(false);
 
   const createNewClient = async () => {
-    if (cartTotal === 0) return alert("Please add items to cart first.")
-    if (!name.length || phone.includes("_") || !address.length) return alert(`Please fill all the required fields of form and try again!`)
+    ScrollToTop();
+    if (cartTotal === 0) return alert("Please add items to cart first.");
+    if (!name.length || phone.includes("_") || !address.length)
+      return alert(
+        `Please fill all the required fields of form and try again!`
+      );
     try {
       const res = await axios.post("/api/v1/clients/create", {
         name,
@@ -41,7 +45,7 @@ const Checkout = () => {
           return setValidationErrors(err?.response?.data?.data);
         default:
           console.log(`Unhandled Error while creating client ${err}`);
-      }      
+      }
     }
   };
 
@@ -53,7 +57,7 @@ const Checkout = () => {
       });
       setClientId(null);
       ScrollToTop();
-      dispatch(clearCart())
+      dispatch(clearCart());
       navigate("/thankyou", { replace: true });
     } catch (err) {
       console.log(`Unhandled Error while creating order ${err}`);
@@ -80,19 +84,19 @@ const Checkout = () => {
   }, [clientId]);
 
   useEffect(() => {
-    validationErrors.forEach(v => {
+    validationErrors.forEach((v) => {
       switch (v?.path) {
         case "phone":
-          return setPhoneNumberError(v?.msg)
+          return setPhoneNumberError(v?.msg);
         case "name":
-          return setNameError(v?.msg)
+          return setNameError(v?.msg);
         case "address":
-          return setAddressError(v?.msg)
+          return setAddressError(v?.msg);
         default:
           console.log(`Unhandled Error in Validations ${v}`);
       }
-    })
-  }, [validationErrors])
+    });
+  }, [validationErrors]);
 
   return (
     <>
@@ -100,8 +104,8 @@ const Checkout = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12 mb-0">
-              <a href="index.html">Home</a> <span className="mx-2 mb-0">/</span>
-              <a href="cart.html">Cart</a> <span className="mx-2 mb-0">/</span>
+              <Link to="/">Home</Link> <span className="mx-2 mb-0">/</span>
+              <Link to="/cart">Cart</Link> <span className="mx-2 mb-0">/</span>
               <strong className="text-black">Checkout</strong>
             </div>
           </div>
@@ -127,13 +131,15 @@ const Checkout = () => {
                       placeholder="Ismingizni kiriting..."
                       value={name}
                       onChange={(e) => {
-                        setName(e.target.value)
+                        setName(e.target.value);
                       }}
                       onBlur={() => setNameFocus(true)}
-                      />
-                      {
-                        nameFocus && !name.length && <small className="text-danger">{nameError || "Invalid Value"}</small>
-                      }
+                    />
+                    {nameFocus && !name.length && (
+                      <small className="text-danger">
+                        {nameError || "Invalid Value"}
+                      </small>
+                    )}
                   </div>
                 </div>
 
@@ -154,9 +160,11 @@ const Checkout = () => {
                       onChange={(e) => setPhone(e.target.value)}
                       onBlur={() => setPhoneFocus(true)}
                     />
-                    {
-                      phoneFocus && (phone.includes("_") || !phone.length ) && <small className="text-danger">{phoneNumberError || "Invalid Value"}</small>
-                    }
+                    {phoneFocus && (phone.includes("_") || !phone.length) && (
+                      <small className="text-danger">
+                        {phoneNumberError || "Invalid Value"}
+                      </small>
+                    )}
                   </div>
                 </div>
 
@@ -175,9 +183,11 @@ const Checkout = () => {
                       onChange={(e) => setAddress(e.target.value)}
                       onBlur={() => setAddressFocus(true)}
                     />
-                    {
-                      addressFocus && !address.length && <small className="text-danger">{addressError || "Address cannot be empty"}</small>
-                    }
+                    {addressFocus && !address.length && (
+                      <small className="text-danger">
+                        {addressError || "Address cannot be empty"}
+                      </small>
+                    )}
                   </div>
                 </div>
 

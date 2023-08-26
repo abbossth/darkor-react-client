@@ -58,7 +58,7 @@ const Cart = () => {
                     {items &&
                       items?.map((i, idx) => {
                         return (
-                          <tr key={idx} >
+                          <tr key={idx}>
                             <td className="product-thumbnail">
                               <img
                                 src={`${i.image}`}
@@ -130,14 +130,13 @@ const Cart = () => {
             <div className="col-md-6">
               <div className="row mb-5">
                 <div className="col-md-6">
-                  <Link to="/shop">
-                    <button
-                      className="btn btn-outline-primary btn-sm btn-block"
-                      onClick={ScrollToTop}
-                    >
-                      Continue Shopping
-                    </button>
-                  </Link>
+                  <div onClick={ScrollToTop}>
+                    <Link to="/shop">
+                      <button className="btn btn-outline-primary btn-sm btn-block">
+                        Continue Shopping
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -146,7 +145,9 @@ const Cart = () => {
                 <div className="col-md-7">
                   <div className="row">
                     <div className="col-md-12 text-right border-bottom mb-5">
-                      <h3 className="text-black h4 text-uppercase">Cart Totals</h3>
+                      <h3 className="text-black h4 text-uppercase">
+                        Cart Totals
+                      </h3>
                     </div>
                   </div>
                   <div className="row mb-5">
@@ -163,6 +164,7 @@ const Cart = () => {
                       {totalCount ? (
                         <Link
                           to={"/checkout"}
+                          onClick={ScrollToTop}
                           style={{ pointerEvents: totalCount ? "" : "none" }}
                         >
                           <button className="btn btn-primary btn-lg btn-block">
