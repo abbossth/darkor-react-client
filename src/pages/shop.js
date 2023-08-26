@@ -42,6 +42,10 @@ const Shop = () => {
     fetchFilteredProducts();
   }, [filters]);
 
+  useEffect(() => {
+    ScrollToTop();
+  }, []);
+
   return (
     <>
       <div className="custom-border-bottom py-3">
