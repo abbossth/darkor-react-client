@@ -35,6 +35,7 @@ const Shop = () => {
       setTotalPages(res?.data?.data?.data?.page?.totalPages);
       setItemsPerPage(res?.data?.data?.data?.page?.limit);
       setLoading(false);
+      console.log(totalPages);
     } catch (err) {
       console.log(`Unhandled Error in fetching filtered products ${err}`);
       setLoading(false);
@@ -50,12 +51,16 @@ const Shop = () => {
 
   const handlePageClick = (e) => {
     setCurrentPage(e?.selected + 1);
+    ScrollToTop();
   };
 
   useEffect(() => {
     fetchFilteredProducts();
     ScrollToTop();
   }, [filters, currentPage]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters]);
 
   return (
     <>
@@ -158,8 +163,12 @@ const Shop = () => {
                 </div>
               )}
               {
-                <div className={`row my-3 ${loading && "d-none"}`}>
-                  <div className="d-flex justify-content-center">
+                <div
+                  className={`row d-flex justify-content-center w-100 my-3 ${
+                    loading && "d-none"
+                  }`}
+                >
+                  <div className="">
                     <ReactPaginate
                       breakLabel="..."
                       nextLabel=">"
@@ -181,37 +190,6 @@ const Shop = () => {
                   </div>
                 </div>
               }
-              {/* {pagenation?.totalPages !== 1 && (
-                <div className="row">
-                  <div className="col-md-12 text-center">
-                    <div className="site-block-27">
-                      <ul>
-                        <li>
-                          <a href="#">&lt;</a>
-                        </li>
-                        <li className="active">
-                          <span>1</span>
-                        </li>
-                        <li>
-                          <a href="#">2</a>
-                        </li>
-                        <li>
-                          <a href="#">3</a>
-                        </li>
-                        <li>
-                          <a href="#">4</a>
-                        </li>
-                        <li>
-                          <a href="#">5</a>
-                        </li>
-                        <li>
-                          <a href="#">&gt;</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              )} */}
             </div>
 
             <div className="col-md-3 order-2 mb-5 mb-md-0">
