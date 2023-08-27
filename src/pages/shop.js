@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
 import { ScrollToTop } from "../plugins/custom";
 import axios from "../api/axios";
+import ReactPaginate from "react-paginate";
+import Loader from "../components/loader";
 
 const Shop = () => {
-  const { products } = useSelector((state) => state.productsReducer);
   const { categories } = useSelector((state) => state.categoriesReducer);
-  const [filteredProducts, setFilteredProducts] = useState([...products]);
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryId = searchParams.get("categoryId") || "";
   const [selectedCategoryId, setSelectedCategoryId] = useState(
@@ -16,18 +16,28 @@ const Shop = () => {
   const [filters, setFilters] = useState(
     categoryId.length ? `?categoryId=${categoryId}` : ""
   );
-  const [pagenation, setPagenation] = useState({
-    page: 1,
-    limit: 12,
-    totalPages: 1,
-  });
+
+  const [loading, setLoading] = useState(false);
+  const [currentItems, setCurrentItems] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(12);
+  const [totalPages, setTotalPages] = useState(1);
+
   const fetchFilteredProducts = async () => {
+    setLoading(true);
     try {
-      const res = await axios.get(`/api/v1/product${filters}`);
-      setFilteredProducts(res?.data?.data?.data?.filteredData);
-      setPagenation(res?.data?.data?.data?.page);
+      const res = await axios.get(
+        `/api/v1/product${filters}${
+          filters.length ? `&` : `?`
+        }page=${currentPage}&limit=${itemsPerPage}`
+      );
+      setCurrentItems(res?.data?.data?.data?.filteredData);
+      setTotalPages(res?.data?.data?.data?.page?.totalPages);
+      setItemsPerPage(res?.data?.data?.data?.page?.limit);
+      setLoading(false);
     } catch (err) {
       console.log(`Unhandled Error in fetching filtered products ${err}`);
+      setLoading(false);
     }
   };
 
@@ -38,13 +48,14 @@ const Shop = () => {
     return setFilters("");
   };
 
-  useEffect(() => {
-    fetchFilteredProducts();
-  }, [filters]);
+  const handlePageClick = (e) => {
+    setCurrentPage(e?.selected + 1);
+  };
 
   useEffect(() => {
+    fetchFilteredProducts();
     ScrollToTop();
-  }, []);
+  }, [filters, currentPage]);
 
   return (
     <>
@@ -98,35 +109,38 @@ const Shop = () => {
                   </div>
                 </div>
               </div>
-              <div className="row mb-5">
-                {filteredProducts &&
-                  filteredProducts?.slice(0, 6)?.map((p, idx) => {
-                    return (
-                      <div
-                        key={idx}
-                        className="col-lg-4 col-md-6 item-entry mb-4"
-                      >
-                        <Link
-                          to={`/product/${p._id}`}
-                          onClick={ScrollToTop}
-                          className="product-item md-height bg-gray d-block"
+              {loading ? (
+                <Loader />
+              ) : (
+                <div className="row mb-5">
+                  {currentItems &&
+                    currentItems?.map((p, idx) => {
+                      return (
+                        <div
+                          key={idx}
+                          className="col-lg-4 col-md-6 item-entry mb-4"
                         >
-                          <img
-                            src={`${p.image}`}
-                            alt="Image"
-                            className="img-fluid"
-                          />
-                        </Link>
-                        <h2 className="item-title">
-                          <span onClick={ScrollToTop}>
-                            <Link to={`/product/${p._id}`}>{p.name}</Link>
-                          </span>
-                        </h2>
-                        <strong className="item-price">{p.price} UZS</strong>
-                      </div>
-                    );
-                  })}
-                {/* <div className="col-lg-6 col-md-6 item-entry mb-4">
+                          <Link
+                            to={`/product/${p._id}`}
+                            onClick={ScrollToTop}
+                            className="product-item md-height bg-gray d-block"
+                          >
+                            <img
+                              src={`${p.image}`}
+                              alt="Image"
+                              className="img-fluid"
+                            />
+                          </Link>
+                          <h2 className="item-title">
+                            <span onClick={ScrollToTop}>
+                              <Link to={`/product/${p._id}`}>{p.name}</Link>
+                            </span>
+                          </h2>
+                          <strong className="item-price">{p.price} UZS</strong>
+                        </div>
+                      );
+                    })}
+                  {/* <div className="col-lg-6 col-md-6 item-entry mb-4">
                   <a href="#" className="product-item md-height bg-gray d-block">
                     <img
                       src="images/prod_3.png"
@@ -141,8 +155,33 @@ const Shop = () => {
                     <del>$46.00</del> $28.00
                   </strong>
                 </div> */}
-              </div>
-              {pagenation?.totalPages !== 1 && (
+                </div>
+              )}
+              {
+                <div className={`row my-3 ${loading && "d-none"}`}>
+                  <div className="d-flex justify-content-center">
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel=">"
+                      previousLabel="<"
+                      previousClassName="page-item"
+                      nextClassName="page-item"
+                      nextLinkClassName="page-link"
+                      previousLinkClassName="page-link"
+                      onPageChange={handlePageClick}
+                      pageCount={totalPages}
+                      pageRangeDisplayed={2}
+                      renderOnZeroPageCount={null}
+                      containerClassName="pagination"
+                      disabledClassName="disabled"
+                      activeClassName="active"
+                      pageLinkClassName="page-link"
+                      pageClassName="page-item"
+                    />
+                  </div>
+                </div>
+              }
+              {/* {pagenation?.totalPages !== 1 && (
                 <div className="row">
                   <div className="col-md-12 text-center">
                     <div className="site-block-27">
@@ -172,7 +211,7 @@ const Shop = () => {
                     </div>
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
 
             <div className="col-md-3 order-2 mb-5 mb-md-0">
